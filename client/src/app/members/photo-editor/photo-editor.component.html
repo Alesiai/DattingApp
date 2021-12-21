@@ -1,19 +1,13 @@
 <div class="row">
-    <div class="col-2" *ngFor="let photo of member.photos" 
-        style="display: grid; 
-            justify-items: center;">
+    <div class="col-2" *ngFor="let photo of member.photos">
         <img src="{{photo.url}}" alt="{{photo.url}}" class="img-thumbnail p-1">
-        <div class="text-center" 
-        style="width: 80%;
-            display: flex;
-            justify-content: space-between;">
+        <div class="text-center">
             <button 
                 [disabled]="photo.isMain"
                 (click)="setMainPhoto(photo)"
                 [ngClass]='photo.isMain ? "btn-success active" : "btn-outline-success"'
-                class="btn btn-sm">
-                Main
-            </button>
+                class="btn btn-sm"
+            >Main</button>
             <button 
                 [disabled]="photo.isMain"
                 (click)="deletePhoto(photo.id)"

@@ -49,14 +49,14 @@ namespace API.Data.Migrations
                 table: "Users",
                 type: "TEXT",
                 nullable: true,
-                defaultValue: "");
+                defaultValue: " ");
 
             migrationBuilder.AddColumn<string>(
                 name: "Introduction",
                 table: "Users",
                 type: "TEXT",
                 nullable: true,
-                defaultValue: "");
+                defaultValue: " ");
 
             migrationBuilder.AddColumn<string>(
                 name: "KnownAs",
@@ -77,7 +77,7 @@ namespace API.Data.Migrations
                 table: "Users",
                 type: "TEXT",
                 nullable: true,
-                defaultValue: "");
+                defaultValue: " ");
 
             migrationBuilder.CreateTable(
                 name: "Photos",

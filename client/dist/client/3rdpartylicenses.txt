@@ -96,6 +96,8 @@ THE SOFTWARE.
 font-awesome
 (OFL-1.1 AND MIT)
 
+ng2-file-upload
+
 ngx-bootstrap
 MIT
 The MIT License (MIT)
@@ -124,6 +126,9 @@ SOFTWARE.
 
 
 ngx-bootstrap/datepicker
+
+ngx-spinner
+MIT
 
 ngx-toastr
 MIT
