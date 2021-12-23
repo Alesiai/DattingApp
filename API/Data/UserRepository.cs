@@ -34,24 +34,23 @@ namespace API.Data
         {
             var query = _context.Users.AsQueryable();
 
-            query = query.Where(x => x.Gender.Equals(userParams.Gender)); 
-            query = query.Where(x => !x.UserName.Equals(userParams.CurrentUsername));
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            query = query.Where(u => u.Gender == userParams.Gender);
 
             var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
             var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
 
-            query = query.Where(x => x.DateOfBirth >= minDob && x.DateOfBirth <= maxDob);
+            query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
 
             query = userParams.OrderBy switch
             {
-                "created" => query = query.OrderByDescending(u => u.Created),
-                _ => query = query.OrderByDescending(u => u.LastActive)
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
             };
-
-            return await PagedList<MemberDto>.CreateAsync(
-                query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(), 
-                userParams.PageNumber, 
-                userParams.PageSize);
+            
+            return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper
+                .ConfigurationProvider).AsNoTracking(), 
+                    userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)
