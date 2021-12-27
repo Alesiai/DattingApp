@@ -130,6 +130,9 @@ ngx-bootstrap/datepicker
 ngx-spinner
 MIT
 
+ngx-timeago
+MIT
+
 ngx-toastr
 MIT
 The MIT License (MIT)
