@@ -5,6 +5,7 @@
 
 
 .angular/
+.pack
 
 # User-specific files
 *.rsuser
