@@ -1,6 +1,6 @@
 <div class="row mb-4">
     <div class="btn-group" name='container' style="justify-content: space-between;">
-        <button style="margin-right: 5px;" class="btn btn-primary" btnRadio='Unread' [(ngModel)]="container" 
+        <button class="btn btn-primary" style="margin-right: 5px;" btnRadio='Unread' [(ngModel)]="container" 
             (click)="loadMessages()">
             <i class="fa fa-envelope"></i> Unread
         </button>
@@ -36,21 +36,21 @@
                 <div *ngIf="container === 'Outbox'">
                     <img style="margin-right: 5px;"
                         class="img-circle rounded-circle mr-2"
-                        src="{{message.recipientPhotoUrl || '../assets/user.png'}}" 
+                        src="{{message.recipientPhotoUrl || './assets/user.png'}}" 
                         alt="{{message.recipientUsername}}">
                     <strong>{{message.recipientUsername | titlecase}}</strong>
                 </div> 
                 <div *ngIf="container !== 'Outbox'">
                     <img style="margin-right: 5px;"
                         class="img-circle rounded-circle mr-2"
-                        src="{{message.senderPhotoUrl  || '../assets/user.png'}}" 
+                        src="{{message.senderPhotoUrl || '../assets/user.png'}}"
                         alt="{{message.senderUsername}}">
                     <strong>{{message.senderUsername | titlecase}}</strong>
                 </div> 
             </td>
             <td>{{message.messageSent | timeago}}</td>
+            <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)" class='btn btn-danger' style="margin-top: 6%;">Delete</button>
             
-            <button class='btn btn-danger' style="margin-top: 6%;" (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)" >Delete</button>
         </tr>
     </table>
 </div>
