@@ -1,5 +1,5 @@
 namespace API.Controllers;
-
+  
 public class AccountController : BaseApiController
 {
     private readonly ITokenService _tokenService;
