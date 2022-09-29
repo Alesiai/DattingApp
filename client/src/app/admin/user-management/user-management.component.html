@@ -4,14 +4,20 @@
             <tr>
                 <th style="width: 30%;">Username</th>
                 <th style="width: 40%;">Active roles</th>
-                <th style="width: 30%;"></th>
+                <th style="width: 15%;"></th>
+                <th style="width: 15%;"></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let user of users">
                 <td>{{user.username}}</td>
                 <td>{{user.roles}}</td>
-                <td><button (click)="openRolesModal(user)" class="btn btn-info">Edit Roles</button></td>
+                <td>
+                    <button (click)="openRolesModal(user)" class="btn btn-info">Edit Roles</button>
+                </td>
+                <td>
+                    <button *ngIf="user.isBlocked" (click)="unblock(user)" class="btn btn-info mrl-5">Unblock user</button>
+                </td>
             </tr>
         </tbody>
 

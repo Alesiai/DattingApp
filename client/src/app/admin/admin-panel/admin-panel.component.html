@@ -11,5 +11,10 @@
                 <app-photo-management></app-photo-management>
             </div>
         </tab>
+        <tab heading='User block managment' *appHasRole='["Admin"]'>
+            <div class="container">
+                <app-user-block-managment></app-user-block-managment>
+            </div>
+        </tab>
     </tabset>
 </div>

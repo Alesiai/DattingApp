@@ -11,6 +11,8 @@ import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
 import { take } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ComplaintMessageComponent } from 'src/app/modals/complaint-message/complaint-message.component';
 
 @Component({
   selector: 'app-member-detail',
@@ -25,11 +27,14 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   activeTab: TabDirective;
   messages: Message[] = [];
   user: User;
+  memberUsername: string = '';
+  bsModalRef: BsModalRef;
 
   constructor(public presence: PresenceService, private route: ActivatedRoute, 
     private messageService: MessageService, private accountService: AccountService, 
     private memberService: MembersService, private toastr: ToastrService, 
-    private router: Router) { 
+    private router: Router, private modalService: BsModalService,) 
+    { 
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
@@ -96,6 +101,12 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     this.memberService.addLike(member.username).subscribe(() => {
       this.toastr.success('You have liked ' + member.knownAs);
     })
+  }
+
+  makeComplaint(member: Member){
+    
+    this.memberService.setUsername(member.username);
+    this.bsModalRef = this.modalService.show(ComplaintMessageComponent);
   }
 
 }
