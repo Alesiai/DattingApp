@@ -27,7 +27,7 @@ export class AccountService {
             this.logout();
           }
           else{
-          this.toastr.info('Your status is: ' + user.roles); 
+          this.presence.createHubConnection(user);
           this.toastr.success('Welcome, ' + user.username);
         }
         }
