@@ -1,0 +1,25 @@
+<form [formGroup]='complaintForm' (ngSubmit)="sendComplaint()" >
+    <div class="modal-header">
+        <div>
+            <strong>Please</strong> <small> enter message for administrator</small>
+        </div>
+        <button type="button" class="close pull-right btn btn-info " aria-label="Close" (click)="bsModalRef.hide()">
+            <i class="fa fa-close" aria-label="Close" (click)="bsModalRef.hide()"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="name">Message</label>
+                    <textarea class="form-control ng-untouched ng-pristine ng-valid" id="name" type="text"
+                        placeholder="Enter your message" [formControl]='complaintForm.controls["message"]'> </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Cancel</button>
+        <button type="button" class="btn btn-success" type="submit" [disabled]='!complaintForm.valid'>Submit</button>
+    </div>
+</form>

@@ -10,8 +10,8 @@ namespace API.Data
 {
     public class Seed
     {
-        public static async Task SeedUsers(UserManager<AppUser> userManager, 
-            RoleManager<AppRole> roleManager)
+        public static async Task SeedUsers(UserManager<AppUser> userManager,
+            RoleManager<AppRole> roleManager, DataContext context)
         {
             if (await userManager.Users.AnyAsync()) return;
 
@@ -46,6 +46,16 @@ namespace API.Data
 
             await userManager.CreateAsync(admin, "Pa$$w0rd");
             await userManager.AddToRolesAsync(admin, new[] {"Admin", "Moderator"});
+
+            await context.Сomplaints.AddAsync(new Сomplaints
+            {
+                Message = "some message",
+                Processed = false,
+                UserName = users.Where(x => x.Id == 1).Select(x => x.UserName).FirstOrDefault(),
+            });
+
+            await context.SaveChangesAsync();
+
         }
     }
 }

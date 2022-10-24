@@ -22,12 +22,14 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly IPhotoService _photoService;
         private readonly IUnitOfWork _unitOfWork;
-        public UsersController(IUnitOfWork unitOfWork, IMapper mapper,
+        private readonly DataContext _context;
+        public UsersController(DataContext context, IUnitOfWork unitOfWork, IMapper mapper,
             IPhotoService photoService)
         {
             _unitOfWork = unitOfWork;
             _photoService = photoService;
             _mapper = mapper;
+            _context = context;
         }
 
         [HttpGet]
@@ -136,6 +138,32 @@ namespace API.Controllers
             if (await _unitOfWork.Complete()) return Ok();
 
             return BadRequest("Failed to delete the photo");
+        }
+
+        [Authorize]
+        [HttpPost("block-user/{username}")]
+        public async Task<ActionResult> UpdateUser(string username)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            user.IsBlocked = true;
+
+            _unitOfWork.UserRepository.Update(user);
+
+            if (await _unitOfWork.Complete()) return NoContent();
+            return BadRequest("Failed to update user");
+        }
+
+        [Authorize]
+        [HttpPost("unblock-user/{username}")]
+        public async Task<ActionResult> UpdateUserState(string username)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            user.IsBlocked = false;
+
+            _unitOfWork.UserRepository.Update(user);
+
+            if (await _unitOfWork.Complete()) return NoContent();
+            return BadRequest("Failed to update user");
         }
     }
 }

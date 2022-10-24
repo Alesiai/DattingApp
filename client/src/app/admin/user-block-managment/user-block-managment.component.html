@@ -1,0 +1,15 @@
+<div class="row">
+    <table class="table">
+        <tr>
+            <th style="width: 30%;">Username</th>
+            <th style="width: 30%;">Text of the complaint</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let complaint of complaints">
+            <td>{{complaint.userName}}</td>
+            <td>{{complaint.message}}</td>
+            <button class='btn btn-sm btn-success mr-1' (click)='approve(complaint)'>Approve</button>
+            <button class='btn btn-sm btn-danger' (click)='reject(complaint.id)'>Reject</button>
+        </tr>
+    </table>
+</div>

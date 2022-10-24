@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
 import { User } from 'src/app/_models/user';
 import { AdminService } from 'src/app/_services/admin.service';
@@ -13,7 +14,8 @@ export class UserManagementComponent implements OnInit {
   users: Partial<User[]>;
   bsModalRef: BsModalRef;
 
-  constructor(private adminService: AdminService, private modalService: BsModalService) { }
+  constructor(private adminService: AdminService, private modalService: BsModalService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getUsersWithRoles();
@@ -23,6 +25,13 @@ export class UserManagementComponent implements OnInit {
     this.adminService.getUsersWithRoles().subscribe(users => {
       this.users = users;
     })
+  }
+
+  unblock(user: User){
+      this.adminService.unblockUser(user.username).subscribe();
+      user.isBlocked = false;
+
+      this.toastr.success('user was succesfully unblocked');
   }
 
   openRolesModal(user: User) {

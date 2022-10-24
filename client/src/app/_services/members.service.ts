@@ -9,6 +9,7 @@ import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 import { User } from '../_models/user';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
+import { Сomplaint } from '../_models/complaint';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class MembersService {
   memberCache = new Map();
   user: User;
   userParams: UserParams;
+  username: string;
 
   constructor(private http: HttpClient, private accountService: AccountService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
@@ -98,5 +100,15 @@ export class MembersService {
     return getPaginatedResult<Partial<Member[]>>(this.baseUrl + 'likes', params, this.http);
   }
 
-  
+  setUsername(username: string){
+    this.username = username;
+  }
+
+  getUsername(){
+    return this.username;
+  }
+
+  createComplaint(model: any){
+    return this.http.post('https://localhost:5001/api/Сomplaints', model);
+  }
 }
