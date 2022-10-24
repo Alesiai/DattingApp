@@ -968,7 +968,7 @@ class MembersService {
         return this.username;
     }
     createComplaint(model) {
-        return this.http.post('https://localhost:5001/api/Сomplaints', model);
+        return this.http.post(this.baseUrl + 'Сomplaints', model);
     }
 }
 MembersService.ɵfac = function MembersService_Factory(t) { return new (t || MembersService)(_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_8__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵinject"](_account_service__WEBPACK_IMPORTED_MODULE_3__.AccountService)); };
