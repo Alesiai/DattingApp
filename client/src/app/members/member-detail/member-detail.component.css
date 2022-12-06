@@ -13,4 +13,9 @@
     padding: 10px 15px;
     background-color: #fff;
     border-top: none;
+    
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
+

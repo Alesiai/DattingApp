@@ -50,7 +50,6 @@ namespace API.Controllers
         [HttpPost]
         public ActionResult PutСomplaints(СomplaintsDto complaintsDto)
         {
-            Console.WriteLine("\nKJHGBJKMLOJIGYFGCHFVNBMML?KJ:HGUKFJGFHXVN BMMMLJ:OIHYOGUIFYGHFXN\n");
             try
             {
                 _context.Сomplaints.Add(new Сomplaints
